@@ -1,0 +1,13 @@
+{
+  "name": "bot-discordjs",
+  "version": "1.0.0",
+  "description": "bot discord js ",
+  "main": "./src/main.js",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC"
+}
