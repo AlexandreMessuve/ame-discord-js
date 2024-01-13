@@ -1,7 +1,7 @@
 # BOT DISCORD JS
 Download this repo
 ```bash
-git clone 'link'
+git clone https://github.com/AlexandreMessuve/ame-discord-js.git
 ```
 
 Install the project
@@ -18,3 +18,5 @@ Run the project with
 ```bash
 npm run start
 ```
+
+### Apache License  2.0
