@@ -9,24 +9,24 @@ client.on(Events.ClientReady, () => {
     console.log(`Connecté via ${client.user.tag}`)
 });
 
-client.on(Events.InteractionCreate, async interation => {
-    if (!interation.isChatInputCommand()) return;
+client.on(Events.InteractionCreate, async interaction => {
+    if (!interaction.isChatInputCommand()) return;
 
-    const command = interation.client.commands.get(interation.commandName);
+    const command = interaction.client.commands.get(interaction.commandName);
     
     if(!command){
-        console.error(`No command match with ${interation.commandName}`)
+        console.error(`No command match with ${interaction.commandName}`)
         return;
     }
 
     try{
-        await command.execute(interation);
+        await command.execute(interaction);
     }catch(err){
         console.error(err);
-        if(interation.replied || interation.deferred){
-            await interation.followUp({content: 'Erreur en executant  la commande', ephemeral:true});
+        if(interaction.replied || interaction.deferred){
+            await interaction.followUp({content: 'Erreur en executant  la commande', ephemeral:true});
         }else{
-            await interation.reply({content:'Erreur en executant la commande', ephemeral:true});
+            await interaction.reply({content:'Erreur en executant la commande', ephemeral:true});
         }
     }
 });
