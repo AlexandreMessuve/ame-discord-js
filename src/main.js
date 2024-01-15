@@ -6,7 +6,7 @@ import client from './setupClient.js';
 
 
 client.on(Events.ClientReady, () => {
-    console.log(`Connecté via ${client.user.tag}`)
+    console.log(`Connected with ${client.user.tag}`)
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -24,9 +24,9 @@ client.on(Events.InteractionCreate, async interaction => {
     }catch(err){
         console.error(err);
         if(interaction.replied || interaction.deferred){
-            await interaction.followUp({content: 'Erreur en executant  la commande', ephemeral:true});
+            await interaction.followUp({content: 'An error occured, try again later', ephemeral:true});
         }else{
-            await interaction.reply({content:'Erreur en executant la commande', ephemeral:true});
+            await interaction.reply({content:'An error occured, try again later', ephemeral:true});
         }
     }
 });

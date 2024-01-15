@@ -23,10 +23,7 @@ const picCommande = {
                 .setRequired(true)
         ),
     async execute(interaction) {
-        let category = await interaction.options.getString('category');
-        if (category === 'random') {
-            category = '';
-        }
+        const category = await interaction.options.getString('category') === 'random' ? '' : await interaction.options.getString('category');
         try {
             const resp = await axios.get(`https://api.api-ninjas.com/v1/randomimage?category=${category}`, {
                 headers: {
@@ -40,7 +37,7 @@ const picCommande = {
                 content: 'Your pic here :',
                 files: [picture]
                })
-            console.log('pic send');
+            console.log('Send pic successful');
         } catch (error) {
             console.error(error);
             await interaction.reply('An error occured, please try later');
