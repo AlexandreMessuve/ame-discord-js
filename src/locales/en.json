@@ -23,5 +23,6 @@
     "eightBallEmbedAnswer": "Answer.",
     "eightBallButton": "{{logo}}Roll the ball.",
     "picMessage": "Your picture:",
-    "errorMessage": "An error occured, please try later."
+    "errorMessage": "An error occured, please try later.",
+    "pingMessage": "Yes, i'm online"
 }

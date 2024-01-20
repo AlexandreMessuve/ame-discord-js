@@ -1,5 +1,10 @@
 import 'dotenv/config';
-import { Client, Collection, GatewayIntentBits, Partials } from 'discord.js';
+import {
+    Client,
+    Collection,
+    GatewayIntentBits,
+    Partials
+} from 'discord.js';
 import i18next from 'i18next';
 import fr from './locales/fr.json' assert {type: 'json'};
 import en from './locales/en.json' assert {type: 'json'};
@@ -56,4 +61,8 @@ client.commands = new Collection();
   }
 });
 
-client.login(process.env.TOKEN);
+try{
+await client.login(process.env.TOKEN);
+}catch (e) {
+    console.error(e);
+}

@@ -23,5 +23,6 @@
     "eightBallEmbedAnswer": "Réponse.",
     "eightBallButton": "{{logo}}Secouez la 8ball.",
     "picMessage" : "Votre image :",
-    "errorMessage": "Une erreur est survenue, merci de réessayer plus tard."
+    "errorMessage": "Une erreur est survenue, merci de réessayer plus tard.",
+    "pingMessage": "Oui, je suis en ligne !"
 }

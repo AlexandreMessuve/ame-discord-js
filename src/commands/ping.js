@@ -1,12 +1,15 @@
 import { SlashCommandBuilder } from "discord.js";
-
-const pingCommande = {
+import i18next from "i18next";
+const pingCommand = {
     data:  new SlashCommandBuilder()
         .setName('ping')
-        .setDescription('Check if the bot is alive'),
-    async execute(interation) {
-        await interation.reply('Yes i\'m Alive');
+        .setDescription('Check if the bot is online')
+        .setDescriptionLocalization('fr', 'Regarde si le bot est en ligne.'),
+
+    async execute(interaction) {
+        console.log(interaction);
+        await interaction.reply(i18next.t('pingMessage'));
     },
 };
 
-export default pingCommande;
+export default pingCommand;

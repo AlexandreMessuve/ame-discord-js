@@ -33,15 +33,6 @@ const picCommand = {
                     { name: 'Abstract', value: 'abstract', name_localizations: { fr: 'Abstrait' } },
                 )
                 .setRequired(true)
-        )
-        .addStringOption(option =>
-            option.setName('lang')
-                .setDescription('Define the language')
-                .setDescriptionLocalization('fr', 'Défini le langage')
-                .addChoices(
-                    { name: 'English', value: 'en', name_localizations: { fr: 'Anglais' } },
-                    { name: 'French', value: 'fr', name_localizations: { fr: 'Français' } })
-                .setRequired(true)
         ),
     /**
      * Executes the command to retrieve and send a random image based on the specified category.
@@ -49,7 +40,7 @@ const picCommand = {
      * @returns {Promise<void>} - A promise that resolves once the command execution is complete.
      */
     async execute(interaction) {
-        const category = await interaction.options.getString('category') === 'random' ? '' : await interaction.options.getString('category');
+        const category = interaction.options.getString('category') === 'random' ? '' : interaction.options.getString('category');
 
         try {
             const resp = await axios.get(`https://api.api-ninjas.com/v1/randomimage?category=${category}`, {

@@ -12,7 +12,7 @@ export default async (interaction) => {
         console.error(`No command match with ${interaction.commandName}`)
         return;
     }
-    const lang = interaction.options.getString('lang');
+    const lang = interaction.locale;
     if(lang){
         await i18next.changeLanguage(lang, err => err ? console.log(err): null);
     }

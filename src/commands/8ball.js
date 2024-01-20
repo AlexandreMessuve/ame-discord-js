@@ -19,16 +19,7 @@ const eightBallCommand = {
                 .setDescription('This will be your question 8ball')
                 .setDescriptionLocalization('fr', 'Ceci sera votre question pour le jeu 8ball')
                 .setRequired(true)
-        )
-        .addStringOption(option  => 
-            option.setName('lang')
-                .setDescription('Define the language')
-                .setDescriptionLocalization('fr', 'Défini le langage')
-                .addChoices(
-                    {name: 'English', value: 'en', name_localizations:{fr: 'Anglais'}},
-                    {name: 'French', value: 'fr', name_localizations:{fr: 'Français'}})
-                .setRequired(true)
-            ),
+        ),
     /**
      * Executes the 8ball command.
      * @param {Object} interaction - The interaction object.

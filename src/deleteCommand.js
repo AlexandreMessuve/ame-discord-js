@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { REST, Routes } from 'discord.js';
 
-const rest = new REST().setToken(process.env.TOKEN);
+const rest = new REST('10').setToken(process.env.TOKEN);
 
 (async () => {
     try{
