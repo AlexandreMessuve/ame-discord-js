@@ -1,7 +1,5 @@
 import 'dotenv/config';
-
-import {Events} from 'discord.js';
-import client from './setupClient.js';
+import { Client, Collection, GatewayIntentBits, Partials } from 'discord.js';
 import i18next from 'i18next';
 import fr from './locales/fr.json' assert {type: 'json'};
 import en from './locales/en.json' assert {type: 'json'};
@@ -19,38 +17,43 @@ i18next.init({
 });
 
 
-client.on(Events.ClientReady, () => {
-    console.log(`Connected via ${client.user.username}`)
+
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildModeration,
+    GatewayIntentBits.GuildEmojisAndStickers,
+    GatewayIntentBits.GuildWebhooks,
+    GatewayIntentBits.GuildInvites,
+    GatewayIntentBits.GuildIntegrations,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageTyping,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.DirectMessageReactions,
+    GatewayIntentBits.DirectMessageTyping
+  ],
+  partials: [
+    Partials.User,
+    Partials.Message,
+    Partials.Channel,
+    Partials.Reaction
+  ]
+
 });
+client.commands = new Collection();
 
-client.on(Events.InteractionCreate, async interaction => {
-    if (!interaction.isChatInputCommand()) return;
-
-    /**
-     * Represents a command.
-     * @type {Object}
-     */
-    const command = interaction.client.commands.get(interaction.commandName);
-    
-    if(!command){
-        console.error(`No command match with ${interaction.commandName}`)
-        return;
-    }
-    const lang = interaction.options.getString('lang');
-    if(lang){
-        await i18next.changeLanguage(lang, err => err ? console.log(err): null);
-    }
-    try{
-        await command.execute(interaction);
-    }catch(err){
-        console.error(err);
-        if(interaction.replied || interaction.deferred){
-            await interaction.followUp({content: i18next.t('errorMessage'), ephemeral:true});
-        }else{
-            await interaction.reply({content:i18next.t('errorMessage'), ephemeral:true});
-        }
-    }
+["events", "commands", "errors"].forEach(async handler => {
+  const handlerImport = await import(`./handlers/${handler}.js`);
+  const handlerFunction = handlerImport.default;
+  if (typeof handlerFunction === 'function') {
+    await handlerFunction(client);
+  } else{
+    console.error(`[ERROR]: Invalid handler function in ./handlers/${handler}`);
+  }
 });
-
 
 client.login(process.env.TOKEN);
