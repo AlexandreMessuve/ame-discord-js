@@ -96,7 +96,7 @@ const eightBallCommand = {
                     i.update({ embeds: [embed2], components: [] });
                 }
             });
-
+            console.log(`8ball successful send in ${interaction.member.guild.name}`);
         } catch (error) {
             console.error(error);
             interaction.reply('An error occured, please try later');

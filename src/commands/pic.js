@@ -55,7 +55,7 @@ const picCommand = {
                 content: i18next.t('picMessage'),
                 files: [picture]
             })
-            console.log('Send pic successful');
+            console.log(`Send pic successful in ${interaction.member.guild.name}`);
         } catch (error) {
             console.error(error);
             await interaction.reply(i18next.t('errorMessage'));
